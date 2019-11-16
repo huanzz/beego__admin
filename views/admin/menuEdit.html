@@ -1,0 +1,114 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <form class="form-horizontal" method="post" action="/admin/menu/doedit?Id={{.menu.Id}}">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">名称</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="Name" name="Name" value="{{.menu.Name}}" placeholder="请输入菜单名称" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-3 control-label">父级菜单</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="Pid" name="Pid" >
+                                <option value="0" {{if eq $.menu.Pid 0}} selected {{end}}>无</option>
+                                {{range .selectMenu}}
+                                    {{if eq .Pid 0}}
+                                    <option value="{{.Id}}" {{if eq $.menu.Pid .Id}} selected {{end}}>{{.Name}}</option>
+                                    {{end}}
+                                {{end}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">模块</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="Module" name="Module" value="{{.menu.Module}}" placeholder="请输入模块名称" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">地址</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="Url" name="Url" value="{{.menu.Url}}" placeholder="请输入链接地址" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">图标</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="Icon" name="Icon" value="{{.menu.Icon}}" placeholder="请输入图标代码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">排序号</label>
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" id="Sort" name="Sort" value="{{.menu.Sort}}" placeholder="请输入排序号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-3 control-label">是否隐藏</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="IsHide" name="IsHide" >
+                                {{if eq .menu.IsHide 1 }}
+                                    <option value="1" selected>否</option>
+                                    <option value="2">是</option>
+                                {{else}}
+                                    <option value="1" >否</option>
+                                    <option value="2" selected>是</option>
+                                {{end}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label  class="col-sm-3 control-label">快捷</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="IsShortcut" name="IsShortcut" >
+                                {{if eq .menu.IsShortcut 1 }}
+                                    <option value="1" selected>无</option>
+                                    <option value="2">有</option>
+                                {{else}}
+                                    <option value="1" >无</option>
+                                    <option value="2" selected>有</option>
+                                {{end}}
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label  class="col-sm-3 control-label">状态</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="status" name="Status" >
+                                {{if eq .menu.Status 1 }}
+                                    <option value="1" selected>使用</option>
+                                    <option value="2">禁用</option>
+                                {{else if eq .menu.Status 2}}
+                                    <option value="1" >使用</option>
+                                    <option value="2" selected>禁用</option>
+                                {{else if eq .menu.Status -2}}
+                                    <option value="-2" selected>默认</option>
+                                {{end}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer clearfix">
+                    <div class="col-sm-9 pull-right">
+                        <button type="submit" class="btn btn-info">保  存</button>
+                        <button type="button" class="btn btn-warning" onclick="addCancel()">取  消</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script src="/static/admin/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    function addCancel() {
+        $("#name").val("");
+        window.location.href="/admin/menu/list";
+    }
+
+</script>

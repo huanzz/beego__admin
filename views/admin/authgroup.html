@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header with-border">
+                <div class="box-tools pull-left">
+                    <a href="/admin/auth/add" type="button" class="btn btn-success "><i class="fa fa-plus">&nbsp;&nbsp;</i>新建</a>
+                </div>
+                <div class="box-tools  pull-right col-md-6">
+                    <form method="post" action="/admin/auth/list" >
+                        <div class="input-group">
+                            <input type="text" style="width: 200px;" class="form-control pull-right" name="search" value="{{.search}}"  placeholder="权限组|描述">
+                            <div class="input-group-btn">
+                                <button type="submit" id="search"  class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
+                                <a  href="/admin/auth/list" class="btn btn-default "><i class="fa fa-close"></i></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th style="width: 15px"><input type="checkbox" class="flat-red js-checkbox-all"></th>
+                        <th>权限组名称</th>
+                        <th>描述</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    {{range .authGroup}}
+                        <tr>
+                            <td><input type="checkbox" class="flat-red" id="Ids" name="ids"  value="{{.Id}}"></td>
+                            <td>{{.Name}}</td>
+                            <td>
+                                {{if eq .Describe ""}}
+                                    暂无描述
+                                {{else }}
+                                    {{.Describe}}
+                                {{end}}
+                            </td>
+                            <td>
+                                {{if eq .Status -2 }}
+                                    <span class="label label-warning">默认</span>
+                                {{else if eq .Status 1}}
+                                    <span class="label label-success">正常</span>
+                                {{else if eq .Status 2}}
+                                    <span class="label label-danger">禁用</span>
+                                {{end}}
+                            </td>
+                            <td>
+                                <a class="btn btn-info" href="/admin/auth/authorize?Id={{.Id}}">授权</a>
+                                <a class="btn btn-success" href="/admin/auth/edit?Id={{.Id}}">编辑</a>
+                                <a class="btn btn-danger" href="/admin/auth/del?Id={{.Id}}">删除</a>
+                            </td>
+                        </tr>
+                    {{end}}
+                </table>
+            </div>
+            <div class="box-footer clearfix">
+                {{template "admin/common/paginator.html".}}
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/admin/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/static/admin/plugins/iCheck/icheck.min.js"></script>
+<script>
+    var $checkboxAll = $(".js-checkbox-all"),
+        $checkbox = $("tbody").find("[type='checkbox']").not("[disabled]"),
+        length = $checkbox.length,
+        i=0;
+
+    //iCheck渲染
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+        checkboxClass: 'icheckbox_flat-green',
+        radioClass   : 'iradio_flat-green'
+    });
+
+    //全选checkbox
+    $checkboxAll.on("ifClicked",function(event){
+        if(event.target.checked){
+            $checkbox.iCheck('uncheck');
+            i=0;
+        }else{
+            $checkbox.iCheck('check');
+            i=length;
+        }
+    });
+
+    $checkbox.on('ifClicked',function(event){
+        event.target.checked ? i-- : i++;
+        if(i==length){
+            $checkboxAll.iCheck('check');
+        }else{
+            $checkboxAll.iCheck('uncheck');
+        }
+    });
+
+
+
+</script>

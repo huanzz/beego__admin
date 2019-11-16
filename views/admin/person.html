@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <form class="form-horizontal" method="post" action="/admin/operate/savemsg?Id={{.User.Id}}">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">会员名</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="MemberName" name="MemberName" value="{{.User.MemberName}}" placeholder="请输入会员名" readonly>
+                            <input type="hidden" class="form-control" id="Status" name="Status" value="{{.User.Status}}" placeholder="请输入会员名" >
+                            <input type="hidden" class="form-control" id="ParentId" name="ParentId" value="{{.User.ParentId}}" placeholder="请输入会员名" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">昵称</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="NickName" name="NickName" value="{{.User.NickName}}" placeholder="请输入昵称" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">邮箱</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="Email" name="Email" value="{{.User.Email}}" placeholder="请输入邮箱" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">手机</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="Mobile" name="Mobile" value="{{.User.Mobile}}" placeholder="请输入手机">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">旧密码</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="OldPassword" name="OldPassword" placeholder="请输入旧密码(若不修改，请勿填写)">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">新密码</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="NewPassword" name="NewPassword"  placeholder="请输入新密码(若不修改，请勿填写)">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">确认密码</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="ReNewPassword" name="ReNewPassword"  placeholder="确认新密码(若不修改，请勿填写)">
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="box-footer clearfix">
+                    <div class="col-sm-9 pull-right">
+                        <button type="submit" class="btn btn-info">保  存</button>
+                        <button type="button" class="btn btn-warning" onclick="addCancel()">取  消</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script src="/static/admin/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    function addCancel() {
+        $("#name").val("");
+        window.location.href="/admin/index";
+    }
+
+</script>

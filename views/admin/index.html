@@ -1,0 +1,96 @@
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="box box-solid bg-aqua-gradient">
+            <div class="box-header">
+                <i class="fa fa-calendar"></i>
+                <h3 class="box-title">后台信息</h3>
+                <div class="pull-right box-tools">
+                    <button type="button" class="btn btn-info btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body text-center">
+                <table class="table table-bordered text-center">
+                    <tr>
+                        <th>后台版本</th>
+                        <th> 0.1</th>
+                    </tr>
+                    <tr>
+                        <th>前端模板</th>
+                        <th> AdminLTE</th>
+                    </tr>
+                    <tr>
+                        <th>后端语言</th>
+                        <th> Golang</th>
+                    </tr>
+                    <tr>
+                        <th>Web框架</th>
+                        <th> Beego</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="box box-solid bg-yellow-gradient">
+            <div class="box-header">
+                <i class="fa fa-calendar"></i>
+                <h3 class="box-title">个人信息</h3>
+                <div class="pull-right box-tools">
+                    <button type="button" class="btn btn-warning btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body box-widget widget-user-2">
+                <div class="widget-user-header bg-yellow-gradient">
+                    <div class="widget-user-image">
+                        <img class="img-circle" src="/static/admin/dist/img/user2-160x160.jpg" alt="User Avatar">
+                    </div>
+                    <h3 class="widget-user-username">{{.Member.NickName}}</h3>
+                    <h5 class="widget-user-desc">Have a good day！</h5>
+                </div>
+                <div class="box-footer no-padding">
+                    <ul class="nav nav-stacked">
+                        <li><a href="#">登录账号：<span class="pull-right">{{.Member.MemberName}}</span></a></li>
+                        <li><a href="#">电子邮箱：<span class="pull-right">{{.Member.Email}}</span></a></li>
+                        <li><a href="#">手机号码：<span class="pull-right ">{{.Member.Mobile}}</span></a></li>
+                        <li><a href="#">注册时间：<span class="pull-right">{{dateformat .Member.CreateAt "2006-01-02 15:04:05 "}}</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="box box-solid bg-green-gradient">
+            <div class="box-header">
+                <i class="fa fa-calendar"></i>
+                <h3 class="box-title">日历信息</h3>
+                <div class="pull-right box-tools">
+                    <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body text-center">
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script src="/static/admin/dist/js/laydate/laydate.js"></script>
+
+<script>
+
+    laydate.render({
+        elem: '#calendar'
+        ,position: 'static'
+        ,theme: '#00ca6d'
+        ,calendar: true
+    });
+</script>

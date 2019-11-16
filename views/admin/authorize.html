@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <form class="form-horizontal" method="post" action="/admin/auth/authorizeto?Id={{.Auth.Id}}">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">权限组</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="Name" name="Name" value="{{.Auth.Name}}" readonly>
+                        </div>
+                        <hr class="col-md-7 col-md-offset-2">
+                    </div>
+
+                    {{range $i, $ele :=.SelectGroup}}
+                        {{if eq $ele.Pid 0 }}
+                            <div class="form-group">
+                                {{if eq $ele.Pid 0}}
+                                    <label class="pull-left col-md-3 control-label">
+                                        <input type="checkbox" name="rules" value="{{$ele.Id}}" class="flat-red" {{if eq $ele.Active true}}checked{{end}}>
+                                        &nbsp;&nbsp;<span class="label label-success">{{$ele.Name}}</span>
+                                    </label>
+                                {{end}}
+                                {{if ne $ele.EmptyChild true }}
+                                    <div class="col-md-9 form-control-static">
+                                        {{range $k,$v :=$.SelectGroup}}
+                                            {{if eq $v.Pid $ele.Id}}
+                                                <label><input type="checkbox" class="flat-red" name="rules" value="{{$v.Id}}" {{if eq $v.Active true}}checked{{end}}>&nbsp;&nbsp;{{$v.Name}}&nbsp;&nbsp;</label>
+                                            {{end}}
+                                        {{end}}
+                                    </div>
+                                {{end}}
+                            </div>
+
+                                <hr class="col-md-7 col-md-offset-2">
+
+                        {{else}}
+                            {{end}}
+                    {{end}}
+                </div>
+
+                <div class="box-footer clearfix">
+                    <div class="col-md-9 pull-right">
+                        <button type="submit" class="btn btn-info">保  存</button>
+                        <button type="button" class="btn btn-warning" onclick="addCancel()">取  消</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script src="/static/admin/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/static/admin/plugins/iCheck/icheck.min.js"></script>
+<script>
+    function addCancel() {
+        $("#name").val("");
+        window.location.href="/admin/auth/list";
+    }
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+        checkboxClass: 'icheckbox_flat-green',
+        radioClass   : 'iradio_flat-green'
+    })
+
+
+</script>

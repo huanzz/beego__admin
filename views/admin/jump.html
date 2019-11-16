@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-12">
+
+        {{if eq .types "Error"}}
+        <div class="callout callout-danger">
+            <h3>Danger!</h3>
+            <h4>{{.msg}}</h4>
+            <h4><span id="s"></span><a id="url" href="{{.url}}">--跳转页面--(点击立即跳转)</a></h4>
+        </div>
+        {{else if eq .types "Info"}}
+        <div class="callout callout-info">
+            <h3>Info!</h3>
+            <h4>{{.msg}}</h4>
+            <h4><span id="s"></span><a id="url" href="{{.url}}">--跳转页面--(点击立即跳转)</a></h4>
+        </div>
+        {{else if eq .types "Warning"}}
+        <div class="callout callout-warning">
+            <h3>Warning!</h3>
+            <h4>{{.msg}}</h4>
+            <h4><span id="s"></span><a id="url" href="{{.url}}">--跳转页面--(点击立即跳转)</a></h4>
+        </div>
+        {{else if eq .types "Success"}}
+        <div class="callout callout-success">
+            <h3>Success!</h3>
+            <h4>{{.msg}}</h4>
+            <h4><span id="s"></span><a id="url" href="{{.url}}">--跳转页面--(点击立即跳转)</a></h4>
+        </div>
+        {{end}}
+    </div>
+</div>
+<script src="/static/admin/bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+
+    var s = document.getElementById('s');
+    var time = 5; //时间,秒            　　　　　　　　
+    function Redirect() {
+        window.location = "{{.url}}";
+    }
+    var i = 0;
+    function dis() {
+        s.innerHTML =  (time - i) + "秒后";
+        i++;
+    }
+    timer = setInterval('dis()', 1000); //显示时间            　　　　　　　　
+    timer = setTimeout('Redirect()', time * 1000); //跳转
+</script>

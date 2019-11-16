@@ -1,0 +1,38 @@
+
+
+<ul class="pagination pagination-sm no-margin pull-right">
+    <li>
+        <a href="{{ if eq $.paginator.currpage 1}}
+                                    javascript:;
+                                 {{ else }}
+                                    ?page={{.paginator.prepage}}
+                                 {{ end }}"
+           aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li>
+    {{if gt $.paginator.currpage 5}}
+        <li><a href="?page=1">1</a></li>
+    {{end}}
+    {{range $k,$v := .paginator.pages}}
+        {{if and (gt $.paginator.currpage 5) (eq $k 0)}}
+            <li><a href="javascript:;">...</a></li>
+        {{else}}
+            {{if eq $v $.paginator.currpage}}
+                <li class="active"><a href="?page={{ $v }}"> {{$v}} </a></li>
+            {{else}}
+                <li ><a href="?page={{ $v }}"> {{$v}} </a></li>
+            {{end}}
+        {{end}}
+    {{end}}
+    <li>
+        <a href="{{if eq $.paginator.currpage .paginator.totalpages}}
+                                    javascript:;
+                                 {{else}}
+                                 ?page={{.paginator.nextpage}}
+                                 {{end}}
+                            " aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+</ul>
