@@ -2,7 +2,8 @@ package filter
 
 import (
 	"bgadmin/common"
-	"blog/controllers"
+	"bgadmin/controllers"
+
 	"github.com/astaxie/beego/context"
 	m "bgadmin/models/admin"
 )
@@ -21,7 +22,7 @@ var FilterAdmin = func(ctx *context.Context) {
 				fullUrl := common.GetFullUrl(url)
 				webTitle =menuMap[fullUrl]
 				if webTitle == "" {
-					base := controllers.BaseController{}
+					base := controllers.LoginController{}
 					url := base.URLFor("BaseController.Tips","types","Info","msg","没有操作权限","url","/admin/index")
 					ctx.Redirect(302, url)
 				}
