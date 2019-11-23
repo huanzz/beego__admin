@@ -8,6 +8,7 @@ import (
 	m "bgadmin/models/admin"
 )
 
+// 过滤未登录用户
 var FilterAdmin = func(ctx *context.Context) {
 	webTitle := ""
 	tu := ctx.Input.Session("member_info")

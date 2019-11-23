@@ -1,6 +1,7 @@
 package admin
 
 import (
+	. "bgadmin/common"
 	"errors"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
@@ -22,10 +23,12 @@ type AuthGroup struct {
 	Member 		[]*Member	`orm:"reverse(many)"`
 }
 
+// Register Model AuthGroup
 func init()  {
 	orm.RegisterModel(new(AuthGroup))
 }
 
+// Check AuthGroup Using valid
 func CheckAuthGroup(a *AuthGroup) (err error) {
 	valid := validation.Validation{}
 	b,_ := valid.Valid(&a)
@@ -38,6 +41,7 @@ func CheckAuthGroup(a *AuthGroup) (err error) {
 	return nil
 }
 
+// Insert AuthGroup
 func InsertAuthGroup(a *AuthGroup) (int64, error) {
 	if err := CheckAuthGroup(a); err!=nil {
 		return 0, err
@@ -53,6 +57,7 @@ func InsertAuthGroup(a *AuthGroup) (int64, error) {
 	return id, err
 }
 
+// Update AuthGroup
 func UpdateAuthGroup(a *AuthGroup) (int64, error) {
 	if err := CheckAuthGroup(a); err != nil {
 		return 0, err
@@ -82,12 +87,14 @@ func UpdateAuthGroup(a *AuthGroup) (int64, error) {
 	return num, err
 }
 
+// Delete AuthGroup By Id
 func DelAuthGroupById(id int) (int64, error) {
 	o := orm.NewOrm()
 	status, err := o.Delete(&AuthGroup{Id: id})
 	return status, err
 }
 
+// Get AuthGroup By Id
 func GetAuthGroupById(id int) (ag AuthGroup) {
 	ag = AuthGroup{Id: id}
 	o := orm.NewOrm()
@@ -95,34 +102,25 @@ func GetAuthGroupById(id int) (ag AuthGroup) {
 	return ag
 }
 
+// Get Group List
 func GetGroupList(page int, pageSize int, search string, memberId int) (authGroup []AuthGroup, count int64) {
 	o := orm.NewOrm()
 	db := o.QueryTable(new(AuthGroup))
-	var offset int
-	if page <= 1 {
-		offset = 0
-	} else {
-		offset = (page - 1) * pageSize
-	}
-
+	offset := PageOffset(page, pageSize)
 	if memberId == 1{
-		db.Limit(pageSize, offset).Exclude("MemberId", 0).OrderBy("-CreateAt").All(&authGroup)
-		count, _ = db.Limit(pageSize, offset).Exclude("MemberId", 0).Count()
+		count,_ =db.Limit(pageSize, offset).Exclude("MemberId", 0).OrderBy("-CreateAt").All(&authGroup)
+		//count, _ = db.Limit(pageSize, offset).Exclude("MemberId", 0).Count()
 	}else {
-		db.Limit(pageSize, offset).Filter("MemberId", memberId).OrderBy("-CreateAt").All(&authGroup)
-		count, _ = db.Limit(pageSize, offset).Filter("MemberId", memberId).Count()
+		count, _ = db.Limit(pageSize, offset).Filter("MemberId", memberId).OrderBy("-CreateAt").All(&authGroup)
+		//count, _ = db.Limit(pageSize, offset).Filter("MemberId", memberId).Count()
 	}
 
 	return authGroup, count
 }
 
+// Get AuthGroup Using SQL
 func GetGroupInSQL(page int, pageSize int, search string, memberId int) (authGroup []AuthGroup, count int64) {
-	var offset int
-	if page <= 1 {
-		offset = 0
-	} else {
-		offset = (page - 1) * pageSize
-	}
+	offset := PageOffset(page, pageSize)
 	qb, _ := orm.NewQueryBuilder("mysql")
 	var conn string
 	if memberId ==1 {
@@ -145,6 +143,7 @@ func GetGroupInSQL(page int, pageSize int, search string, memberId int) (authGro
 	return authGroup,count
 }
 
+// Add Rules When Add Menu
 func AddRuleWhenAddMenu(menuId int64, memberId int)  {
 	member := GetMemberById(memberId)
 	parentId := member.ParentId
@@ -168,11 +167,11 @@ func AddRuleWhenAddMenu(menuId int64, memberId int)  {
 
 }
 
+// Delete On eRule By Menu Id
 func DelOneRuleByMenu(menuId int, memberId int)  {
 	member := GetMemberById(memberId)
 	parentId := member.ParentId
 	groupId := member.AuthGroup.Id
-
 	auth := GetAuthGroupById(groupId)
 	rules := auth.Rules
 	ids := GetMenuIds(memberId)

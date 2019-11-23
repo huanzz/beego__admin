@@ -32,16 +32,19 @@ type MemberL struct {
 	Name string
 }
 
+// Register Model Member
 func init()  {
 	orm.RegisterModel(new(Member))
 }
 
+// check Password and RePassword
 func (u *Member) Valid(v *validation.Validation) {
 	if u.Password != u.RePassword {
 		v.SetError("RePassword", "两次输入的密码不一样")
 	}
 }
 
+// Check Member
 func CheckMember(m *Member) (err error) {
 	valid := validation.Validation{}
 	b,_ := valid.Valid(&m)
@@ -54,6 +57,7 @@ func CheckMember(m *Member) (err error) {
 	return nil
 }
 
+// Insert Member
 func InsertMember(m *Member) (int64, error) {
 	if err := CheckMember(m); err!=nil {
 		return 0, err
@@ -74,6 +78,7 @@ func InsertMember(m *Member) (int64, error) {
 	return id, err
 }
 
+// Update Member message
 func UpdateMember(m *Member) (int64, error) {
 	if err := CheckMember(m); err != nil {
 		return 0, err
@@ -114,12 +119,14 @@ func UpdateMember(m *Member) (int64, error) {
 	return num, err
 }
 
+// Delete Member By Id
 func DelMemberById(id int) (int64, error) {
 	o := orm.NewOrm()
 	status, err := o.Delete(&Member{Id:id})
 	return status,err
 }
 
+// Get Member By Member Name
 func GetMemberByMemberName(membername string) (member Member, err error) {
 	member = Member{MemberName: membername}
 	o := orm.NewOrm()
@@ -127,6 +134,7 @@ func GetMemberByMemberName(membername string) (member Member, err error) {
 	return member,err
 }
 
+// Get Member By Id
 func GetMemberById(memberId int) (member Member) {
 	member = Member{Id: memberId}
 	o := orm.NewOrm()
@@ -134,28 +142,7 @@ func GetMemberById(memberId int) (member Member) {
 	return member
 }
 
-func GetMemberList(page int, pageSize int, sort string, search string, parentId int) (members []Member, count int64) {
-	o := orm.NewOrm()
-	db := o.QueryTable(new(Member))
-	var offset int
-	if page <= 1 {
-		offset = 0
-	} else {
-		offset = (page - 1) * pageSize
-	}
-	str := strings.Trim(search," ")
-
-	if parentId == 1{
-		db.Exclude("ParentId", 0).Limit(pageSize, offset).RelatedSel().OrderBy(sort).All(&members)
-		count, _ = db.Exclude("ParentId", 0).Filter("nickname__icontains", str).Limit(pageSize, offset).RelatedSel().Count()
-	}else {
-		db.Filter("ParentId", parentId).Limit(pageSize, offset).OrderBy(sort).RelatedSel().All(&members)
-		count, _ = db.Filter("ParentId", parentId).Filter("nickname__icontains", str).Limit(pageSize, offset).RelatedSel().Count()
-	}
-	log.Println(count)
-	return members, count
-}
-
+// Exist Member By GroupId?
 func ExistMemberByGroupId(groupId int) (res bool)  {
 	res = false
 	o := orm.NewOrm()
@@ -167,13 +154,9 @@ func ExistMemberByGroupId(groupId int) (res bool)  {
 	return res
 }
 
+// Get Member List using SQL
 func GetMemberListInSQL(page int, pageSize int, sort string, search string, parentId int) (members []MemberL, count int64) {
-	var offset int
-	if page <= 1 {
-		offset = 0
-	} else {
-		offset = (page - 1) * pageSize
-	}
+	offset := PageOffset(page, pageSize)
 	qb, _ := orm.NewQueryBuilder("mysql")
 	var conn string
 	if parentId ==1 {

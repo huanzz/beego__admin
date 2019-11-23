@@ -2,10 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="888d3f2d-1a44-4650-b78b-ba574f7b695c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controllers/IndexController.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/admin/common/empty.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/admin/common/icons.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/common.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/common.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/LoginController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/LoginController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/admin/AdminController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin/AdminController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/admin/BaseController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin/BaseController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/default.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/error.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/error.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/filter/admin.go" beforeDir="false" afterPath="$PROJECT_DIR$/filter/admin.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/admin/AuthGroup.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/admin/AuthGroup.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/admin/Member.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/admin/Member.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/admin/Menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/admin/Menu.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/routers/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/member.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/member.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/menuEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/menuEdit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/person.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/person.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/register.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,6 +56,7 @@
   <component name="ProjectId" id="1TEXm4SIs2VGlrASwSgfEo1qc9T" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -47,20 +66,20 @@
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../goDemo/go-micro-example" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\JUNE\go\src\bgadmin\views" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\JUNE\go\src\bgadmin\views" />
       <recent name="C:\Users\JUNE\go\src\bgadmin\views\admin" />
       <recent name="C:\Users\JUNE\go\src\bgadmin\controllers" />
       <recent name="C:\Users\JUNE\go\src\bgadmin\models" />
       <recent name="C:\Users\JUNE\go\src\bgadmin\models\admin" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\JUNE\go\src\bgadmin\views" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -83,7 +102,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

@@ -20,7 +20,7 @@ func (this *AdminController)Index()  {
 	this.TplName = "admin/index.html"
 }
 
-//
+//个人信息页面
 func (this *AdminController)Person()  {
 	Id,_ := this.GetInt("Id")
 	var user admin.Member
@@ -29,6 +29,7 @@ func (this *AdminController)Person()  {
 	this.TplName = "admin/person.html"
 }
 
+//保存个人信息
 func (this *AdminController)SaveMsg()  {
 	Id,_ := this.GetInt("Id")
 	oldPwd := this.GetString("OldPassword")
@@ -246,6 +247,7 @@ func (this *AdminController)AuthorizePage()  {
 	this.TplName = "admin/authorize.html"
 }
 
+//权限组授权操作
 func (this *AdminController) Authorize() {
 	Id,_ := this.GetInt("Id")
 	rules := this.GetStrings("rules")
@@ -347,3 +349,13 @@ func (this *AdminController)MenuDel(){
 
 }
 
+//
+func (this *AdminController)MenuIcon()  {
+	i,_  := this.GetInt("Id")
+	this.Layout = ""
+	if i == 1111 {
+		this.TplName = "admin/common/icons.html"
+	}else {
+		this.TplName = "admin/common/empty.html"
+	}
+}

@@ -19,7 +19,7 @@ type BaseController struct {
 	Member    		m.Member 		//登陆的用户
 }
 
-
+// Check Login
 func CheckLogin(membername string, password string) (member m.Member, err error) {
 	member,_ = m.GetMemberByMemberName(membername)
 	if member.Id == 0 {
@@ -31,6 +31,7 @@ func CheckLogin(membername string, password string) (member m.Member, err error)
 	return member, nil
 }
 
+// Preparation
 func (this *BaseController) Prepare() {
 	this.IsLogin = false
 	tu := this.GetSession("member_info")
@@ -50,7 +51,6 @@ func (this *BaseController) Prepare() {
 	this.Data["MenuView"] = m.GetMenuView(this.Member.Id)
 	this.Layout = "admin/layout.html"
 
-
 	// 判断子类是否实现了NestPreparer接口，如果实现了就调用接口方法。
 	if app, ok := this.AppController.(NestPreparer); ok {
 		app.NestPrepare()
@@ -58,9 +58,12 @@ func (this *BaseController) Prepare() {
 
 }
 
+// no auth tips
 func (this *BaseController)Tips()  {
 	this.NoteAndJump("Warning", "没有操作权限", "/admin/index")
 }
+
+// Note And Jump
 func (this *BaseController)NoteAndJump(types, msg, url string)  {
 	this.Data["types"] = types
 	this.Data["msg"] = msg
@@ -69,6 +72,7 @@ func (this *BaseController)NoteAndJump(types, msg, url string)  {
 	return
 }
 
+// Check Auth
 func (this *BaseController)CheckAuth(memberId int,url string) bool  {
 	if memberId !=1 {
 		menuMap := m.GetMenuMap(this.Member.Id)
@@ -79,4 +83,5 @@ func (this *BaseController)CheckAuth(memberId int,url string) bool  {
 	}
 	return true
 }
+
 

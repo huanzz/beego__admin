@@ -12,7 +12,7 @@ type LoginController struct {
 	beego.Controller
 }
 
-
+//	login page
 func (this *LoginController)Login() {
 	memberInfo := this.GetSession("member_info")
 	if memberInfo != nil {
@@ -22,6 +22,7 @@ func (this *LoginController)Login() {
 	}
 }
 
+//	login 检测
 func (this *LoginController)LoginAdmin() {
 	memberName := this.GetString("memberName")
 	password := this.GetString("password")
@@ -35,17 +36,19 @@ func (this *LoginController)LoginAdmin() {
 
 }
 
-//退出
+//	退出登录
 func (this *LoginController) Logout() {
 	this.DelSession("member_info")
 	this.Ctx.Redirect(302, "/login")
 }
 
+//	修改密码页面
 func (this *LoginController) ChangePwd()  {
 	this.Data["WebTitle"] = "修改密码"
 	this.TplName = "register.html"
 }
 
+//	保存已修改的密码
 func (this *LoginController)SaveChange()  {
 	memberName := this.GetString("MemberName")
 	Email := this.GetString("Email")
@@ -76,6 +79,7 @@ func (this *LoginController)SaveChange()  {
 	}
 }
 
+//	notice 页面
 func (this *LoginController)Notice(types, msg, url string)  {
 	this.Data["types"] = types
 	this.Data["msg"] = msg

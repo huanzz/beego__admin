@@ -1,7 +1,7 @@
 package admin
 
 import (
-	"bgadmin/common"
+	. "bgadmin/common"
 	"errors"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
@@ -26,7 +26,6 @@ type Menu struct {
 	Active 		bool		`orm:"null"`
 }
 
-
 type MenuView struct {
 	Menu
 	Child 		[]Menu
@@ -39,11 +38,12 @@ type MenuList struct {
 	ChildCount 	int64
 }
 
-
+// Register Model Menu
 func init()  {
 	orm.RegisterModel(new(Menu))
 }
 
+// Check Menu Using valid
 func CheckMenu(m *Menu) (err error) {
 	valid := validation.Validation{}
 	b,_ := valid.Valid(&m)
@@ -56,6 +56,7 @@ func CheckMenu(m *Menu) (err error) {
 	return nil
 }
 
+// Insert Menu
 func InsertMenu(m *Menu) (int64, error) {
 	if err := CheckMenu(m); err!=nil {
 		return 0, err
@@ -75,6 +76,7 @@ func InsertMenu(m *Menu) (int64, error) {
 	return id, err
 }
 
+// Update Menu
 func UpdateMenu(m *Menu) (int64, error) {
 	if err := CheckMenu(m); err != nil {
 		return 0, err
@@ -116,6 +118,7 @@ func UpdateMenu(m *Menu) (int64, error) {
 	return num, err
 }
 
+// Delete Menu By Id
 func DelMenuById(id int) (int64, error) {
 	o := orm.NewOrm()
 	status, err := o.Delete(&Menu{Id:id})
@@ -129,6 +132,7 @@ func GetMenuByName(name string) (menu Menu) {
 	return menu
 }
 
+// Get one Menu By Id
 func GetMenuById(Id int) (menu Menu) {
 	menu = Menu{Id: Id}
 	o := orm.NewOrm()
@@ -136,14 +140,16 @@ func GetMenuById(Id int) (menu Menu) {
 	return menu
 }
 
+// Get Menu Ids by memberId
 func GetMenuIds(memberId int) (ids []int) {
 	member := GetMemberById(memberId)
 	authGroup := GetAuthGroupById(member.AuthGroup.Id)
 	rules := authGroup.Rules
-	ids = common.StrToIntArr(rules)
+	ids = StrToIntArr(rules)
 	return ids
 }
 
+// Get MenuList generate View
 func GetMenuView(memberId int) []MenuView {
 	ids := GetMenuIds(memberId)
 	var menu []Menu
@@ -162,6 +168,7 @@ func GetMenuView(memberId int) []MenuView {
 	return res
 }
 
+// Get Menu Map (Menu-key-value)
 func GetMenuMap(memberId int) (menuMap map[string]string) {
 	ids := GetMenuIds(memberId)
 	var menu []Menu
@@ -176,6 +183,7 @@ func GetMenuMap(memberId int) (menuMap map[string]string) {
 	return menuMap
 }
 
+// Get Menu Count By ParentId
 func GetMenuCountByPid(pid int) (count int64)  {
 	o := orm.NewOrm()
 	db := o.QueryTable(new(Menu))
@@ -183,24 +191,25 @@ func GetMenuCountByPid(pid int) (count int64)  {
 	return count
 }
 
+// Get MenuList to generate Selection
 func GetMenuSelect(rules string, parentRules string)(res []MenuView)  {
 	var menu []Menu
-	ids := common.StrToIntArr(rules)
-	idsParent := common.StrToIntArr(parentRules)
+	ids := StrToIntArr(rules)
+	idsParent := StrToIntArr(parentRules)
 	o := orm.NewOrm()
 	db := o.QueryTable(new(Menu))
 	db.Filter("Id__in", idsParent).OrderBy("sort").All(&menu)
 	for _,v := range menu {
 		row := MenuView{Menu:v}
 		db.Filter("pid", v.Id).OrderBy("sort").All(&row.Child)
-		if ok := common.NumInIds(v.Id, ids); ok{
+		if ok := NumInIds(v.Id, ids); ok{
 			row.Active = true
 		}
 		if len(row.Child) == 0{
 			row.EmptyChild = true
 		}
 		for _,val := range row.Child{
-			if ok :=common.NumInIds(val.Id, ids); ok{
+			if ok := NumInIds(val.Id, ids); ok{
 				val.Active = true
 			}
 		}
@@ -209,6 +218,7 @@ func GetMenuSelect(rules string, parentRules string)(res []MenuView)  {
 	return res
 }
 
+// Get Menu List of Shortcut
 func GetMenuShortcut(memberId int) (res []Menu, count int64) {
 	ids := GetMenuIds(memberId)
 	o := orm.NewOrm()
@@ -218,40 +228,13 @@ func GetMenuShortcut(memberId int) (res []Menu, count int64) {
 	return res, count
 }
 
-func GetMenuList(page int, pageSize int, search string, memberId int, Pid int) (menuList []MenuList, count int64) {
-	ids := GetMenuIds(memberId)
-	o := orm.NewOrm()
-	db := o.QueryTable(new(Menu))
-	var offset int
-	if page <= 1 {
-		offset = 0
-	} else {
-		offset = (page - 1) * pageSize
-	}
-	var menu []Menu
-	str := strings.Trim(search," ")
-	db.Limit(pageSize, offset).Filter("Pid", Pid).Filter("Id__in", ids).Filter("Name__icontains", str).OrderBy("sort").All(&menu)
-	for _,v := range menu {
-		row := MenuList{Menu: v}
-		num := GetMenuCountByPid(v.Id)
-		row.ChildCount = num
-		menuList = append(menuList, row)
-	}
-	count, _ = db.Filter("Pid", Pid).Filter("Id__in", ids).Filter("Name__icontains", str).Count()
-	return menuList, count
-}
-
+// Get Menu List Using SQL
 func GetMenuListInSQL(page int, pageSize int, search string, memberId int, Pid int) (menuList []MenuList, count int64) {
 	member := GetMemberById(memberId)
 	authGroup := GetAuthGroupById(member.AuthGroup.Id)
 	ids := authGroup.Rules
 
-	var offset int
-	if page <= 1 {
-		offset = 0
-	} else {
-		offset = (page - 1) * pageSize
-	}
+	offset := PageOffset(page, pageSize)
 	qb, _ := orm.NewQueryBuilder("mysql")
 	var menus []Menu
 	o := orm.NewOrm()
