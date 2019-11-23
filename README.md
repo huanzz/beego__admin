@@ -20,4 +20,11 @@ $ bee run
 
 5、访问http://localhost:8080
 
+## 效果展示
+![](https://github.com/huanzz/beego__admin/blob/master/__images/1111111.png)
+![](https://github.com/huanzz/beego__admin/blob/master/__images/222.png)
+![](https://github.com/huanzz/beego__admin/blob/master/__images/333.png)
+![](https://github.com/huanzz/beego__admin/blob/master/__images/444.png)
+![](https://github.com/huanzz/beego__admin/blob/master/__images/55555555.png)
+![](https://github.com/huanzz/beego__admin/blob/master/__images/666.png)
 
