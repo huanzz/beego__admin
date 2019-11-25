@@ -23,7 +23,7 @@ type Menu struct {
 	Icon		string		`orm:"null" form:"Icon"`
 	UpdateAt	time.Time	`orm:"auto_now;type(datetime)"`
 	CreateAt 	time.Time	`orm:"type(datetime);auto_now_add"`
-	Active 		bool		`orm:"null"`
+	Active 		bool		`orm:"-"`
 }
 
 type MenuView struct {

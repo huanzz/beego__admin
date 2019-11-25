@@ -49,7 +49,7 @@ func (this *BaseController) Prepare() {
 	this.Data["WebTitle"] = menuMap[GetFullUrl(url)]
 	this.Data["Member"] = this.Member
 	this.Data["MenuView"] = m.GetMenuView(this.Member.Id)
-	this.Layout = "admin/layout.html"
+	this.Layout = "admin/common/layout.html"
 
 	// 判断子类是否实现了NestPreparer接口，如果实现了就调用接口方法。
 	if app, ok := this.AppController.(NestPreparer); ok {
@@ -68,7 +68,7 @@ func (this *BaseController)NoteAndJump(types, msg, url string)  {
 	this.Data["types"] = types
 	this.Data["msg"] = msg
 	this.Data["url"] = url
-	this.TplName = "admin/jump.html"
+	this.TplName = "admin/common/jump.html"
 	return
 }
 

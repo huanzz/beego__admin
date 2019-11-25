@@ -150,7 +150,7 @@ func InsertInitMenu()  {
 	InsertMenu(member.Id,"会员新建", "admin", "/member/add", "fa fa-user-plus",notHide)
 	InsertMenu(member.Id,"会员编辑", "admin", "/member/edit", "fa fa-edit", isHide)
 	InsertMenu(member.Id,"会员保存", "admin", "/member/doedit", "fa fa-edit",isHide)
-	InsertMenu(member.Id,"会员删除", "admin", "/member/del", "fa-user-times",isHide)
+	InsertMenu(member.Id,"会员删除", "admin", "/member/del", "fa fa-user-times",isHide)
 	authGroup := mo.GetMenuByName("权限管理")
 	InsertMenu(authGroup.Id,"权限组列表", "admin", "/auth/list", "fa fa-unlock-alt", notHide)
 	InsertMenu(authGroup.Id,"权限组添加", "admin", "/auth/add", "fa fa-plus-square",notHide)
@@ -163,7 +163,7 @@ func InsertInitMenu()  {
 	InsertMenu(menu.Id,"菜单新建", "admin", "/menu/add", "fa fa-plus-circle",notHide)
 	InsertMenu(menu.Id,"菜单编辑", "admin", "/menu/edit", "fa fa-pencil",isHide)
 	InsertMenu(menu.Id,"菜单保存", "admin", "/menu/doedit", "fa fa-pencil",isHide)
-	InsertMenu(menu.Id,"菜单删除", "admin", "/menu/del", "fa-minus-circle",isHide)
+	InsertMenu(menu.Id,"菜单删除", "admin", "/menu/del", "fa fa-minus-circle",isHide)
 }
 
 func InsertMenu(pid int, name, module, url, icon string, hide int)  {
