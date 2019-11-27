@@ -3,17 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="888d3f2d-1a44-4650-b78b-ba574f7b695c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/admin/BaseController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin/BaseController.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Init.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/Init.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/admin/Menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/admin/Menu.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/common/empty.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/common/empty.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/common/icons.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/common/icons.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/jump.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/common/jump.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/admin/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/common/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/notice.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/notice.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/register.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
