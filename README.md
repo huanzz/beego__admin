@@ -7,18 +7,20 @@
 1、先安装beego框架
 
 2、获取项目
-`$ go get https://github.com/huanzz/beego__admin`
+`$ go get https://github.com/huanzz/bgadmin`
 
-3、修改 conf/app.conf 中mysql的设置
+3、新建mysql数据库
 
-4、终端下进入到项目目录
+4、修改 conf/app.conf 中mysql的设置
+
+5、终端下进入到项目目录
 ```
 $ go build      
-$ beego__admin syncdb   //数据库初始化
+$ bgadmin syncdb   //数据库初始化
 $ bee run
 ```
 
-5、访问http://localhost:8080
+6、访问http://localhost:8080
 
 ## 效果展示
 ![](https://github.com/huanzz/beego__admin/blob/master/__images/1111111.png)
