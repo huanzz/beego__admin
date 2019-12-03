@@ -1,7 +1,7 @@
 package admin
 
 import (
-	. "bgadmin/common"
+	. "github.com/huanzz/bgadmin/common"
 	"errors"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
@@ -24,6 +24,7 @@ type Menu struct {
 	UpdateAt	time.Time	`orm:"auto_now;type(datetime)"`
 	CreateAt 	time.Time	`orm:"type(datetime);auto_now_add"`
 	Active 		bool		`orm:"-"`
+
 }
 
 type MenuView struct {
@@ -33,10 +34,12 @@ type MenuView struct {
 	Active 		bool
 }
 
+
 type MenuList struct {
 	Menu
 	ChildCount 	int64
 }
+
 
 // Register Model Menu
 func init()  {
@@ -168,6 +171,7 @@ func GetMenuView(memberId int) []MenuView {
 	return res
 }
 
+
 // Get Menu Map (Menu-key-value)
 func GetMenuMap(memberId int) (menuMap map[string]string) {
 	ids := GetMenuIds(memberId)
@@ -254,3 +258,17 @@ func GetMenuListInSQL(page int, pageSize int, search string, memberId int, Pid i
 	}
 	return menuList, count
 }
+
+// Total Menu List
+func TotalMenuList(search string, memberId int, Pid int) int64 {
+	member := GetMemberById(memberId)
+	authGroup := GetAuthGroupById(member.AuthGroup.Id)
+	ids := authGroup.Rules
+	var menus []Menu
+	o := orm.NewOrm()
+	str := "%" + strings.Trim(search, " ") + "%"
+	sql := "Select * From menu Where menu.id in ("+ids+") And menu.pid = ? AND (menu.name LIKE ? OR menu.module LIKE ? OR menu.url LIKE ?)"
+	count, _ := o.Raw(sql, Pid,str,str,str).QueryRows(&menus)
+	return count
+}
+

@@ -4,6 +4,19 @@
     <list default="true" id="888d3f2d-1a44-4650-b78b-ba574f7b695c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/app.conf" beforeDir="false" afterPath="$PROJECT_DIR$/conf/app.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/IndexController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/IndexController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/LoginController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/LoginController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/admin/AdminController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin/AdminController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/admin/BaseController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/admin/BaseController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/filter/admin.go" beforeDir="false" afterPath="$PROJECT_DIR$/filter/admin.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Init.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/Init.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/admin/AuthGroup.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/admin/AuthGroup.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/admin/Member.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/admin/Member.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/admin/Menu.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/admin/Menu.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/routers/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -103,5 +116,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/controllers/admin/AdminController.go</url>
+          <line>17</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

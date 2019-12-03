@@ -1,7 +1,7 @@
 package models
 
 import (
-	"bgadmin/common"
+	"github.com/huanzz/bgadmin/common"
 	"database/sql"
 	"fmt"
 	"github.com/astaxie/beego"
@@ -9,7 +9,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	"log"
 	_ "github.com/go-sql-driver/mysql"
-	mo "bgadmin/models/admin"
+	mo "github.com/huanzz/bgadmin/models/admin"
 )
 
 var o orm.Ormer

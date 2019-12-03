@@ -7,7 +7,7 @@
 1、先安装beego框架
 
 2、获取项目
-`$ go get https://github.com/huanzz/bgadmin`
+`$ go get github.com/huanzz/bgadmin`
 
 3、新建mysql数据库
 

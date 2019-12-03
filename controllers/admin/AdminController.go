@@ -1,8 +1,8 @@
 package admin
 
 import (
-	"bgadmin/common"
-	"bgadmin/models/admin"
+	"github.com/huanzz/bgadmin/common"
+	"github.com/huanzz/bgadmin/models/admin"
 	"errors"
 	"strconv"
 	"strings"
@@ -161,7 +161,8 @@ func (this *AdminController)GroupList()  {
 	if page == 0{
 		page = 1
 	}
-	authGroup,total := admin.GetGroupInSQL(page, 10, search, this.Member.Id)
+	authGroup,_ := admin.GetGroupInSQL(page, 10, search, this.Member.Id)
+	total := admin.TotalAuthGroup(search, this.Member.Id)
 	this.Data["authGroup"] = authGroup
 	this.Data["search"] = search
 	this.Data["paginator"] = common.Paginator(page,10, total)
@@ -273,13 +274,20 @@ func (this *AdminController)MenuList()  {
 	if page == 0{
 		page = 1
 	}
+	var pageSize int
+	if Pid == 0 {
+		pageSize = 10
+	}else {
+		pageSize = 50
+	}
 	memberId := this.Member.Id
-	menuList,total := admin.GetMenuListInSQL(page, 10, search, memberId, Pid)
+	menuList,_ := admin.GetMenuListInSQL(page, pageSize, search, memberId, Pid)
+	total := admin.TotalMenuList(search, memberId, Pid)
 	this.Data["Pid"] = Pid
 	this.Data["search"] = search
 	this.Data["menuList"] = menuList
 	this.Data["ParentMenu"] = admin.GetMenuById(Pid)
-	this.Data["paginator"] = common.Paginator(page,10, total)
+	this.Data["paginator"] = common.Paginator(page,pageSize, total)
 	this.TplName = "admin/menu.html"
 
 }

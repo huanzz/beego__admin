@@ -1,8 +1,8 @@
 package admin
 
 import (
-	. "bgadmin/common"
-	m "bgadmin/models/admin"
+	. "github.com/huanzz/bgadmin/common"
+	m "github.com/huanzz/bgadmin/models/admin"
 	"errors"
 	"github.com/astaxie/beego"
 	"strings"

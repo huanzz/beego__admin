@@ -1,11 +1,10 @@
 package filter
 
 import (
-	"bgadmin/common"
-	"bgadmin/controllers"
-
+	"github.com/huanzz/bgadmin/common"
+	"github.com/huanzz/bgadmin/controllers"
 	"github.com/astaxie/beego/context"
-	m "bgadmin/models/admin"
+	m "github.com/huanzz/bgadmin/models/admin"
 )
 
 // 过滤未登录用户

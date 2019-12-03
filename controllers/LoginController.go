@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"bgadmin/common"
-	"bgadmin/controllers/admin"
+	"github.com/huanzz/bgadmin/common"
+	"github.com/huanzz/bgadmin/controllers/admin"
 	"errors"
 	"github.com/astaxie/beego"
-	mo "bgadmin/models/admin"
+	mo "github.com/huanzz/bgadmin/models/admin"
 )
 
 type LoginController struct {

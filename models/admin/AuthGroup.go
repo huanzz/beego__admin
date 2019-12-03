@@ -1,7 +1,7 @@
 package admin
 
 import (
-	. "bgadmin/common"
+	. "github.com/huanzz/bgadmin/common"
 	"errors"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
@@ -143,6 +143,30 @@ func GetGroupInSQL(page int, pageSize int, search string, memberId int) (authGro
 	return authGroup,count
 }
 
+// Total Auth Group
+func TotalAuthGroup(search string, memberId int) (count int64)  {
+	qb, _ := orm.NewQueryBuilder("mysql")
+	var conn string
+	if memberId ==1 {
+		conn = "auth_group.member_id <> 0 AND (auth_group.name LIKE ? OR auth_group.describe LIKE ? )"
+	}else {
+		conn = "auth_group.member_id = ? AND (auth_group.name LIKE ? OR auth_group.describe LIKE ?)"
+	}
+	qb.Select("auth_group.id","auth_group.name","auth_group.describe","auth_group.member_id","auth_group.`status`").
+		From("auth_group").
+		Where(conn)
+	sql := qb.String()
+	o := orm.NewOrm()
+	var authGroup []AuthGroup
+	str := "%" + strings.Trim(search, " ") + "%"
+	if memberId == 1 {
+		count, _ = o.Raw(sql,str,str).QueryRows(&authGroup)
+	}else {
+		count, _ = o.Raw(sql,memberId,str,str).QueryRows(&authGroup)
+	}
+	return count
+}
+
 // Add Rules When Add Menu
 func AddRuleWhenAddMenu(menuId int64, memberId int)  {
 	member := GetMemberById(memberId)
@@ -166,6 +190,7 @@ func AddRuleWhenAddMenu(menuId int64, memberId int)  {
 	}
 
 }
+
 
 // Delete On eRule By Menu Id
 func DelOneRuleByMenu(menuId int, memberId int)  {

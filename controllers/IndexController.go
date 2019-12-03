@@ -1,6 +1,8 @@
 package controllers
 
-import "github.com/astaxie/beego"
+import (
+	"github.com/astaxie/beego"
+)
 
 type IndexController struct {
 	beego.Controller
@@ -8,6 +10,7 @@ type IndexController struct {
 
 func (this *IndexController)Index()  {
 	this.TplName  = "index.html"
+
 }
 
 
