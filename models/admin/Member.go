@@ -1,7 +1,7 @@
 package admin
 
 import (
-	. "github.com/huanzz/bgadmin/common"
+	. "bgadmin/common"
 	"errors"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"

@@ -1,11 +1,10 @@
 package controllers
 
 import (
-	"github.com/huanzz/bgadmin/common"
-	"github.com/huanzz/bgadmin/controllers/admin"
+	"bgadmin/controllers/admin"
+	mo "bgadmin/models/admin"
 	"errors"
 	"github.com/astaxie/beego"
-	mo "github.com/huanzz/bgadmin/models/admin"
 )
 
 type LoginController struct {
@@ -60,7 +59,7 @@ func (this *LoginController)SaveChange()  {
 	if err == nil {
 		if Email == member.Email {
 			if Password == RePassword && Password != "" {
-				member.Password = common.PwdHash(Password)
+				member.Password = Password
 				_,err = mo.UpdateMember(&member)
 			}else {
 				err = errors.New("两次密码不一致！")
